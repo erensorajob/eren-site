@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - 絵恋空 Official Site</title>
+    
+    <!-- フォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Rampart+One&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           全体設定（トップページと共通）
+           ======================================== */
+        body { 
+            margin: 0; 
+            font-family: 'M PLUS Rounded 1c', sans-serif; 
+            color: #333; 
+            overflow-x: hidden;
+            background-color: #f0f8fa; 
+            background-image: radial-gradient(#bce4f0 2px, transparent 2px); 
+            background-size: 20px 20px; 
+        }
+
+        /* ========================================
+           コンテンツエリア（ページの中身を囲む箱）
+           ======================================== */
+        .container { 
+            max-width: 800px; 
+            margin: 80px auto 50px; /* 上に少し多めの余白（アイコンと被らないため） */
+            padding: 0 20px; 
+        }
+
+        .page-content {
+            background: rgba(255, 255, 255, 0.9); /* 少し透ける白背景で可愛く */
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+
+        /* ページタイトルのデザイン */
+        h1.page-title {
+            font-family: 'Rampart One', sans-serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #ff9fb5;
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* ========================================
+           ハンバーガーメニュー（トップページと完全に同じ）
+           ======================================== */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        #menu-toggle { display: none; }
+
+        .custom-menu-icon {
+            display: block;
+            width: 200px;  
+            height: 200px;
+            cursor: pointer;
+            z-index: 1000;
+            position: relative;
+        }
+
+        .custom-menu-icon img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .icon-close {
+            opacity: 0;
+            transform: scale(0.5) rotate(-45deg);
+        }
+
+        #menu-toggle:checked ~ .custom-menu-icon .icon-open {
+            opacity: 0;
+            transform: scale(0.5) rotate(45deg);
+        }
+
+        #menu-toggle:checked ~ .custom-menu-icon .icon-close {
+            opacity: 1;
+            transform: scale(1) rotate(0);
+        }
+
+        .menu-content {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 250px;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            padding-top: 220px; 
+        }
+
+        .menu-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-content li {
+            text-align: center;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .menu-content a {
+            display: block;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            font-family: 'Rampart One', sans-serif;
+            font-size: 1.5rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .menu-content a:hover {
+            background-color: #ffd1dc;
+            color: white;
+        }
+
+        #menu-toggle:checked ~ .menu-content {
+            right: 0;
+        }
+
+    @media screen and (max-width: 900px) {
+        .custom-menu-icon {
+            width: 100px;  /* スマホでの幅（好みのサイズに調整してください） */
+            height: 100px; /* 幅と同じ数値にします */
+        }
+    
+        /* ↓追加：アイコンに合わせてメニュー内の上の隙間も少し狭くする */
+        .menu-content {
+            padding-top: 120px; 
+        }
+    }
+
+    /* --- カレンダーを囲む枠の設定 --- */
+.calendar-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  border: 4px solid #ff9fb5; /* ← ★これを変更！ピンクの枠線をつけます */ /* 最大幅。サイトのデザインに合わせて調整してください */
+  margin: 0 auto;    /* 中央寄せ */
+  border-radius: 10px; /* ←これを追加！ 角が少し丸くなります */
+}
+
+/* --- iframe本体の設定 --- */
+.calendar-wrapper iframe {
+  width: 100% !important;  /* HTML側のwidth指定を上書きして100%にする */
+  height: 600px;           /* PC表示時の基本の高さ */
+  border: none;            /* 枠線を消す */
+  border-radius: 10px; /* ←これを追加！ 角が少し丸くなります */
+  display: block; /* ← ★これを追加！隙間が消えます */
+}
+
+/* --- スマホ画面（幅768px以下）の調整 --- */
+@media (max-width: 768px) {
+  .calendar-wrapper iframe {
+    height: 400px; /* スマホで長すぎず、予定が潰れない絶妙な高さに調整 */
+  }
+}
+    </style>
+</head>
+<body>
+
+    <!-- 右上の固定ハンバーガーメニュー（全ページ共通） -->
+    <div class="hamburger-menu">
+        <input type="checkbox" id="menu-toggle">
+        
+        <label for="menu-toggle" class="custom-menu-icon">
+            <img src="open.png" class="icon-open" alt="メニュー">
+            <img src="close.png" class="icon-close" alt="閉じる">
+        </label>
+        
+        <nav class="menu-content">
+            <ul>
+                <!-- トップページに戻るリンクを追加しておくと便利です -->
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="works.html">Works</a></li>
+                <li><a href="links.html">Official Links</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ページの中身エリア -->
+    <div class="container">
+        <div class="page-content">
+            
+            <!-- ここから自由にページの中身を書いていきます -->
+            <div class="calendar-wrapper">
+            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&title=%E7%B5%B5%E6%81%8B%E7%A9%BA%E3%81%AE%E9%85%8D%E4%BF%A1%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&mode=MONTH&showTabs=0&showTz=0&showCalendars=0&src=ZXJlbnNvcmEuam9iQGdtYWlsLmNvbQ&color=%23ff9fb5" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <!-- ここまで -->
+
+        </div>
+    </div>
+
+</body>
+</html>

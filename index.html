@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>絵恋空 Official Site</title>
+    
+    <!-- フォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Rampart+One&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           全体設定
+       ======================================== */
+    /* 全体設定の body に横揺れ防止を追加 */
+    body { 
+        margin: 0; 
+        font-family: 'M PLUS Rounded 1c', sans-serif; 
+        color: #333; 
+        overflow-x: hidden;
+
+        /* ↓水色の水玉模様（ドット柄）にする設定 */
+        background-color: #f0f8fa; /* ベースのすごく薄い水色 */
+        background-image: radial-gradient(#bce4f0 2px, transparent 2px); /* ドットの色と大きさ */
+        background-size: 20px 20px; /* ドットの間隔 */
+    }
+
+    /* ========================================
+       トップ画像エリア（絶対に切れない設定）
+       ======================================== */
+    .top-images {
+        display: flex; /* 横並びにする */
+        width: 100%;
+    }
+
+    .top-images img {
+        width: 33.333%; /* ぴったり3等分 */
+        height: auto;   /* 画像本来の比率を保つ（絶対に見切れない） */
+        display: block;
+    }
+
+    /* スマホ表示の時は、左右を消して真ん中を100%にする */
+    @media screen and (max-width: 900px) {
+        .top-images .img-left,
+        .top-images .img-right {
+            display: none; 
+        }
+        .top-images .img-center {
+            width: 100%;
+        }
+    }
+
+    /* ========================================
+       FANBOXバナー（画像の下に普通に置く設定）
+       ======================================== */
+
+    .full-width-banner {
+        display: block; 
+        position: relative; /* absolute（浮かす設定）をやめる */
+        width: 100%; 
+        max-width: 800px; 
+        margin: 0 auto; /* 中央寄せ */
+        text-decoration: none; 
+        transition: opacity 0.3s ease; 
+    }
+    
+    .full-width-banner:hover {
+        opacity: 0.8; 
+    }
+
+    .full-width-banner img {
+        width: 100%; 
+        height: auto; 
+        display: block; 
+    }
+
+    .banner-text {
+        position: absolute; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.8); 
+        letter-spacing: 0.1em;
+        pointer-events: none; 
+        width: 100%;
+    }
+    
+    /* スマホ表示の時はバナーの文字を少し小さくする */
+    @media screen and (max-width: 900px) {
+        .banner-text { font-size: 1.2rem; }
+    }
+
+        /* ========================================
+           コンテンツエリア（News, Schedule, Works など）
+           ======================================== */
+        .container { 
+            max-width: 800px; 
+            margin: 50px auto; /* 上下に余白を取って中央寄せ */
+            padding: 0 20px; 
+        }
+
+        .section {
+            background: white; 
+            padding: 30px; 
+            margin-bottom: 40px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+
+        /* 見出し（h2）のデザイン */
+        .section-title, h2 {
+            font-family: 'Rampart One', sans-serif; /* 見出しも可愛いフォントに */
+            font-weight: 400;
+            text-align: center;
+            border-bottom: 2px solid #ff9fb5; /* ピンクの下線 */
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+        }
+
+        /* News リスト */
+        .news-list { 
+            list-style: none; 
+            padding: 0; 
+        }
+        
+        .news-list li { 
+            border-bottom: 1px dashed #ccc; 
+            padding: 15px 0; 
+        }
+
+        .date {
+            color: #ff9fb5; /* 日付をピンクにして目立たせる */
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 15px;
+        }
+
+        /* ========================================
+           Works（作品紹介）の設定
+           ======================================== */
+        .work-item {
+            text-align: center;
+            margin-bottom: 50px; /* 作品ごとに間隔を開ける */
+        }
+        
+        /* 最後の作品の下は余白を空けない */
+        .work-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .work-image-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #eee;
+            line-height: 250px; 
+            margin-bottom: 15px;
+            border-radius: 8px;
+            color: #999;
+        }
+/* ========================================
+   ハンバーガーメニューのデザイン
+   ======================================== */
+.hamburger-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+/* チェックボックス本体は画面から隠す */
+#menu-toggle {
+    display: none;
+}
+
+
+/* ========================================
+   オリジナルイラストのメニューアイコン設定
+   ======================================== */
+.custom-menu-icon {
+    display: block;
+    width: 200px;  /* ★アイコンの大きさ（大きくしたい場合は数字を増やす） */
+    height: 200px;
+    cursor: pointer;
+    z-index: 1000;
+    position: relative;
+}
+
+.custom-menu-icon img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease; /* ふんわり切り替わる魔法 */
+}
+
+/* 最初は「閉じる」アイコンを見えないように隠しておく */
+.icon-close {
+    opacity: 0;
+    transform: scale(0.5) rotate(-45deg); /* 小さくして少し傾けておく */
+}
+
+/* ========================================
+   メニューをクリックした時のアニメーション
+   ======================================== */
+/* チェックが入ったら、元のアイコンをフワッと消す */
+#menu-toggle:checked ~ .custom-menu-icon .icon-open {
+    opacity: 0;
+    transform: scale(0.5) rotate(45deg);
+}
+
+/* チェックが入ったら、「閉じる」アイコンをフワッと出す */
+#menu-toggle:checked ~ .custom-menu-icon .icon-close {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+@media screen and (max-width: 900px) {
+    .custom-menu-icon {
+        width: 100px;  /* スマホでの幅（好みのサイズに調整してください） */
+        height: 100px; /* 幅と同じ数値にします */
+    }
+    
+    /* ↓追加：アイコンに合わせてメニュー内の上の隙間も少し狭くする */
+    .menu-content {
+        padding-top: 120px; 
+    }
+}
+/* ========================================
+   メニューの中身（右から出てくる白い箱）の設定
+   ======================================== */
+/* メニューの中身（初期状態は右画面外に隠しておく） */
+.menu-content {
+    position: fixed;
+    top: 0;
+    right: -100%; /* -100% で右の外に隠す */
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    padding-top: 220px; /* アイコンに被らないように上を空ける */
+}
+
+.menu-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-content li {
+    text-align: center;
+    border-bottom: 1px dashed #ccc;
+}
+
+/* ★ここでメニューの文字とフォントを設定しています！ */
+.menu-content a {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    
+    /* ↓可愛いタイトル用フォント（Rampart One）を適用 */
+    font-family: 'Rampart One', sans-serif;
+    
+    font-weight: 400;
+    font-size: 1.5rem; /* ちょっと大きめにする */
+    transition: background 0.3s, color 0.3s;
+}
+
+.menu-content a:hover {
+    background-color: #ffd1dc; /* マウスを乗せた時の背景色 */
+    color: white; /* マウスを乗せた時の文字色 */
+}
+
+/* ========================================
+   メニューを開く動き
+   ======================================== */
+/* チェックが入った時（クリック時）メニューを右からスライドイン */
+#menu-toggle:checked ~ .menu-content {
+    right: 0;
+}
+
+/* スマホ表示の時はメニューを少し小さくする */
+@media screen and (max-width: 900px) {
+    .top-menu {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        gap: 10px;
+    }
+    .top-menu a {
+        font-size: 0.75rem;
+    }
+}
+
+        /* ========================================
+           各種ボタンのデザイン
+           ======================================== */
+        .btn { 
+            display: inline-block; 
+            padding: 12px 30px; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 30px; /* 角を丸く */
+            font-weight: bold; 
+            margin: 5px; 
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        /* 色のバリエーション */
+        .btn-fanbox { background-color: #ff9fb5; }
+        .btn-amazon { background-color: #ff9900; }
+        .btn-dmm { background-color: #e5002d; }
+        .btn-dl { background-color: #007bff; }
+        
+    </style>
+</head>
+
+    
+<body>
+<!-- 右上の固定ハンバーガーメニュー -->
+<div class="hamburger-menu">
+    <input type="checkbox" id="menu-toggle">
+    
+    <!-- ★ここを変更：三本線の代わりに2枚の画像を置く -->
+    <label for="menu-toggle" class="custom-menu-icon">
+        <!-- 普段表示されるアイコン（例：ミニキャラやリボン） -->
+        <img src="open.png" class="icon-open" alt="メニュー">
+        <!-- 開いた時に表示される「閉じる」アイコン（例：可愛いバツ印） -->
+        <img src="close.png" class="icon-close" alt="閉じる">
+    </label>
+    
+    <!-- 開いた時に出る縦並びのメニュー（変更なし） -->
+    <nav class="menu-content">
+        <ul>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="works.html">Works</a></li>
+            <li><a href="links.html">Official Links</a></li>
+        </ul>
+    </nav>
+</div>
+
+    <!-- ① ファーストビュー（画像をただ横に並べるだけ！） -->
+    <div class="top-images">
+        <!-- background-imageではなく、直接画像を読み込みます -->
+        <img src="left.png" class="img-left" alt="">
+        <img src="center半角.png" class="img-center" alt="絵恋空 Official Web Site">
+        <img src="right仮.png" class="img-right" alt="">
+    </div>
+    
+    <!-- そのすぐ下にFANBOXバナーを配置 -->
+    <div class="banner-area">
+        <a href="https://erensora.fanbox.cc/" class="full-width-banner">
+            <img src="eren_header.jpeg" alt="FANBOXはこちら">
+            <span class="banner-text">PIXIV FANBOX<br>OFFICIAL FANCLUB</span>
+        </a>
+    </div>
+
+    <!-- ② 下に続くコンテンツ全体を囲む箱 -->
+    <div class="container">
+        
+        <!-- 新着情報エリア -->
+        <section id="news" class="section">
+            <h2>News</h2>
+            <ul class="news-list">
+                <li><span class="date">2026.08.25</span> オフィシャルサイトをオープンしました！</li>
+                <li><span class="date">2026.08.20</span> 新作の予約受付を開始しました。</li>
+            </ul>
+        </section>
+
+        <!-- スケジュールエリア -->
+        <section id="schedule" class="section">
+            <h2>Schedule</h2>
+            <div style="background-color: #eee; padding: 50px; text-align: center; border-radius: 8px; color: #999;">
+                【ここにGoogleカレンダーが表示されます】
+            </div>
+        </section>
+
+        <!-- 作品紹介エリア -->
+        <section id="works" class="section">
+            <h2>Works</h2>
+            
+            <!-- 1つ目の作品 -->
+            <div class="work-item">
+                <div class="work-image-placeholder">アフィリンク用画像貼る</div> 
+                <h3>最新作タイトル</h3>
+                <p>見どころの一言コメントをここに書きます。</p>
+                <a href="https://video.dmm.co.jp/av/list/?actress=1096339" class="btn btn-dmm">FANZAで見る</a>
+            </div>
+
+            <!-- 2つ目の作品 -->
+            <div class="work-item">
+                <div class="work-image-placeholder">アフィリンク用画像貼る</div> 
+                <h3>最新作タイトル</h3>
+                <p>職場ではバリキャリ上司の彼女と二人きりになると…「従順肉便器化するので一生離さない潮吹き調教を始めることにした」</p>
+                <a href="https://www.dlsite.com/maniax/work/=/product_id/RJ01673925.html" class="btn btn-dl">DLsiteでASMRを聴く</a>
+            </div>
+        </section>
+        
+        <!-- リンク集エリア -->
+        <section id="links" class="section">
+            <h2>Official Links</h2>
+            <p style="text-align: center; margin-bottom: 20px;">作品の購入やファンクラブへのご参加はこちらから！</p>
+            <div style="text-align: center;">
+                <a href="https://erensora.fanbox.cc/" class="btn btn-fanbox">FANBOX はこちら</a>
+                <a href="AmazonのURL" class="btn btn-amazon">Amazon 作品一覧</a>
+                <a href="https://video.dmm.co.jp/av/list/?actress=1096339" class="btn btn-dmm">DMM (FANZA) 作品一覧</a>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
