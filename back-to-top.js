@@ -2,7 +2,8 @@
     const button = document.querySelector('.back-to-top');
     if (!button) return;
 
-    const showAfter = 360;
+    // 短めのページでも表示できるよう、少しスクロールした時点で表示します。
+    const showAfter = 120;
     const updateVisibility = () => {
         button.classList.toggle('is-visible', window.scrollY > showAfter);
     };
