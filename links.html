@@ -51,6 +51,21 @@
             text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
+        .site-footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px 14px;
+            margin: 28px auto 40px;
+            padding: 0 20px;
+            color: #999;
+            text-align: center;
+            font-size: .72rem;
+            line-height: 1.6;
+        }
+
+        .site-footer a { margin-right: 14px; color: #d86682; }
+
         .links-intro {
             margin: -10px 0 28px;
             color: #666;
@@ -67,9 +82,7 @@
         .official-link {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            min-height: 110px;
-            padding: 20px;
+            overflow: hidden;
             color: #333;
             background: #fff8fa;
             border: 2px solid #ffd1dc;
@@ -78,6 +91,35 @@
             text-decoration: none;
             box-sizing: border-box;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .link-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 1;
+            object-fit: cover;
+        }
+
+        .link-image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            aspect-ratio: 3 / 1;
+            color: #fff;
+            background: linear-gradient(135deg, #ff9fb5, #9ecfe0);
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+        }
+
+        .link-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 76px;
+            padding: 16px 18px;
         }
 
         .official-link:hover {
@@ -228,7 +270,7 @@
                 <li><a href="index.html">Home</a></li> 
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
-                <li><a href="works.html">Works</a></li>
+                <li><a href="work.html">Works</a></li>
                 <li><a href="links.html">Official Links</a></li>
             </ul>
         </nav>
@@ -244,14 +286,47 @@
 
             <div class="official-links">
                 <a href="https://erensora.fanbox.cc/" class="official-link" target="_blank" rel="noopener noreferrer">
-                    <span class="link-name">PIXIV FANBOX</span>
-                    <span class="link-description">オフィシャルファンクラブ</span>
+                    <img src="fanbox.png" class="link-image" alt="PIXIV FANBOX">
+                    <span class="link-content">
+                        <span class="link-name">PIXIV FANBOX</span>
+                        <span class="link-description">オフィシャルファンクラブ</span>
+                    </span>
                 </a>
-
-                <!-- リンク追加用の雛形：このaタグ全体をコピーして、URL・名前・説明を書き換えます。
+                <a href="https://x.com/eren_cmore" class="official-link" target="_blank" rel="noopener noreferrer">
+                    <img src="twitter.png" class="link-image" alt="サービス名">
+                    <span class="link-content">
+                        <span class="link-name">TWITTER</span>
+                        <span class="link-description">空の日常</span>
+                    </span>
+                </a>
+                <a href="https://www.youtube.com/@erensora" class="official-link" target="_blank" rel="noopener noreferrer">
+                    <div class="link-image-placeholder" aria-label="YouTube">YouTube</div>
+                    <span class="link-content">
+                        <span class="link-name">YouTube</span>
+                        <span class="link-description">動画投稿頑張り中</span>
+                    </span>
+                </a>
+                <a href="https://www.instagram.com/erensora_official" class="official-link" target="_blank" rel="noopener noreferrer">
+                    <div class="link-image-placeholder" aria-label="Instagram">Instagram</div>
+                    <span class="link-content">
+                        <span class="link-name">Instagram</span>
+                        <span class="link-description">公式写真・日常</span>
+                    </span>
+                </a>
+                <a href="https://www.tiktok.com/@erensora_" class="official-link" target="_blank" rel="noopener noreferrer">
+                    <div class="link-image-placeholder" aria-label="TikTok">TikTok</div>
+                    <span class="link-content">
+                        <span class="link-name">TikTok</span>
+                        <span class="link-description">ショート動画</span>
+                    </span>
+                </a>
+                <!-- リンク追加用の雛形：このaタグ全体をコピーして、URL・画像・名前・説明を書き換えます。
                 <a href="ここにURL" class="official-link" target="_blank" rel="noopener noreferrer">
-                    <span class="link-name">サービス名</span>
-                    <span class="link-description">ここに短い説明を書きます</span>
+                    <img src="ここに画像ファイル名" class="link-image" alt="サービス名">
+                    <span class="link-content">
+                        <span class="link-name">サービス名</span>
+                        <span class="link-description">ここに短い説明を書きます</span>
+                    </span>
                 </a>
                 -->
             </div>
@@ -260,6 +335,13 @@
 
         </div>
     </div>
+
+    <footer class="site-footer">
+        <a href="site-info.html">サイト情報・広告について</a>
+        <span>R-18・18歳未満閲覧禁止</span>
+        <span>アフィリエイト広告を含みます</span>
+        <span>© 絵恋空 Official Site</span>
+    </footer>
 
 </body>
 </html>

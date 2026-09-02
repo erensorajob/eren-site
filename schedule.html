@@ -51,6 +51,21 @@
             text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
+        .site-footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px 14px;
+            margin: 28px auto 40px;
+            padding: 0 20px;
+            color: #999;
+            text-align: center;
+            font-size: .72rem;
+            line-height: 1.6;
+        }
+
+        .site-footer a { margin-right: 14px; color: #d86682; }
+
         .content-section + .content-section {
             margin-top: 48px;
         }
@@ -209,23 +224,108 @@
         }
     }
 
-    /* --- カレンダーを囲む枠の設定 --- */
+    /* --- APIで取得した予定を囲む枠の設定 --- */
 .calendar-wrapper {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  border: 4px solid #ff9fb5; /* ← ★これを変更！ピンクの枠線をつけます */ /* 最大幅。サイトのデザインに合わせて調整してください */
-  margin: 0 auto;    /* 中央寄せ */
-  border-radius: 10px; /* ←これを追加！ 角が少し丸くなります */
+  border: 4px solid #ff9fb5;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 18px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, .78);
 }
 
-/* --- iframe本体の設定 --- */
-.calendar-wrapper iframe {
-  width: 100% !important;  /* HTML側のwidth指定を上書きして100%にする */
-  height: 600px;           /* PC表示時の基本の高さ */
-  border: none;            /* 枠線を消す */
-  border-radius: 10px; /* ←これを追加！ 角が少し丸くなります */
-  display: block; /* ← ★これを追加！隙間が消えます */
+.calendar-note {
+  margin: -4px 0 14px;
+  color: #888;
+  font-size: .85rem;
+  text-align: center;
+}
+
+.calendar-status {
+  margin: 10px 0;
+  padding: 20px;
+  color: #777;
+  text-align: center;
+  background: #fff8fa;
+  border-radius: 10px;
+}
+
+.calendar-events {
+  display: grid;
+  gap: 12px;
+}
+
+.calendar-event {
+  padding: 18px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+.calendar-event time {
+  display: block;
+  margin-bottom: 6px;
+  color: #e9829a;
+  font-weight: 700;
+}
+
+.calendar-event h4 {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+}
+
+.calendar-event p {
+  margin: 0;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.calendar-event-location {
+  margin-top: 8px !important;
+  color: #777;
+  font-size: .9rem;
+}
+
+.calendar-event-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.calendar-event-links a {
+  display: inline-block;
+  padding: 7px 12px;
+  color: #fff;
+  background: #d86682;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.calendar-event-links a:hover {
+  background: #be536f;
+}
+
+.calendar-add-link {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 7px 12px;
+  color: #d86682;
+  border: 1px solid #f0a5b6;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.calendar-add-link:hover {
+  color: #fff;
+  background: #d86682;
 }
 
 /* --- スマホ画面（幅768px以下）の調整 --- */
@@ -238,8 +338,8 @@
     font-size: 2.3rem;
   }
 
-  .calendar-wrapper iframe {
-    height: 400px; /* スマホで長すぎず、予定が潰れない絶妙な高さに調整 */
+  .calendar-wrapper {
+    padding: 12px;
   }
 }
     </style>
@@ -261,7 +361,7 @@
                 <li><a href="index.html">Home</a></li> 
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
-                <li><a href="works.html">Works</a></li>
+                <li><a href="work.html">Works</a></li>
                 <li><a href="links.html">Official Links</a></li>
             </ul>
         </nav>
@@ -292,14 +392,181 @@
                 </div>
 
                 <h3 class="calendar-title">Calendar</h3>
+                <p class="calendar-note">公開カレンダーから最新の予定を表示しています。</p>
                 <div class="calendar-wrapper">
-                    <iframe title="絵恋空の公開スケジュール" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&src=M2NlODY5MzM2NjMxZWNiNjdkMDc4ODM2ZjVmNzQ1YjA1ZmVjZTAyMTRiODNhMWVlYWE0OTZiZWEwZjRmMTVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039be5&color=%230b8043" style="border: solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                    <p class="calendar-status" data-calendar-status>予定を読み込んでいます…</p>
+                    <div class="calendar-events" data-calendar-events></div>
                 </div>
             </section>
             <!-- ここまで -->
 
         </div>
     </div>
+
+    <footer class="site-footer">
+        <a href="site-info.html">サイト情報・広告について</a>
+        <span>R-18・18歳未満閲覧禁止</span>
+        <span>アフィリエイト広告を含みます</span>
+        <span>© 絵恋空 Official Site</span>
+    </footer>
+
+    <script>
+        (() => {
+            const status = document.querySelector('[data-calendar-status]');
+            const eventList = document.querySelector('[data-calendar-events]');
+            if (!status || !eventList) return;
+
+            if (window.location.protocol === 'file:') {
+                status.textContent = '公開サイトでカレンダーを表示します。';
+                return;
+            }
+
+            fetch('/api/schedule', { headers: { Accept: 'application/json' } })
+                .then((response) => {
+                    if (!response.ok) throw new Error(`calendar request failed: ${response.status}`);
+                    return response.json();
+                })
+                .then((data) => {
+                    const events = Array.isArray(data.events) ? data.events : [];
+                    status.remove();
+                    if (!events.length) {
+                        eventList.innerHTML = '<p class="empty-message">現在、予定はありません。</p>';
+                        return;
+                    }
+                    events.forEach((event) => eventList.appendChild(renderEvent(event)));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    status.textContent = 'カレンダーを読み込めませんでした。しばらくしてから再度お試しください。';
+                });
+
+            function renderEvent(event) {
+                const article = document.createElement('article');
+                article.className = 'calendar-event';
+
+                const time = document.createElement('time');
+                time.dateTime = event.start?.dateTime || event.start?.date || '';
+                time.textContent = formatEventDate(event);
+                article.appendChild(time);
+
+                const title = document.createElement('h4');
+                title.textContent = event.summary || '予定';
+                article.appendChild(title);
+
+                if (event.description) {
+                    const description = document.createElement('p');
+                    const links = extractUrls(event.description);
+                    description.textContent = links.reduce(
+                        (text, url) => text.replace(url, ''),
+                        event.description,
+                    ).trim();
+                    if (description.textContent) article.appendChild(description);
+
+                    if (links.length) {
+                        const linkList = document.createElement('div');
+                        linkList.className = 'calendar-event-links';
+                        links.forEach((url, index) => {
+                            const label = links.length > 1 ? `詳細リンク${index + 1}` : '詳細リンク';
+                            linkList.appendChild(createExternalLink(url, label));
+                        });
+                        article.appendChild(linkList);
+                    }
+                }
+
+                if (event.location) {
+                    const location = document.createElement('p');
+                    location.className = 'calendar-event-location';
+                    location.textContent = `場所：${event.location}`;
+                    article.appendChild(location);
+                }
+
+                // Googleのコピー機能ではなく、閲覧者自身が新規予定を作るテンプレートです。
+                // そのため、このサイトのカレンダー所有者やメールは追加されません。
+                const addLink = createExternalLink(createGoogleTemplateUrl(event), '自分のカレンダーに追加');
+                addLink.classList.add('calendar-add-link');
+                article.appendChild(addLink);
+
+                return article;
+            }
+
+            function extractUrls(text) {
+                return [...new Set((text.match(/https?:\/\/[^\s<>"']+/g) || [])
+                    .map((url) => url.replace(/[。、，,）)]+$/g, ''))
+                    .filter(isHttpUrl))];
+            }
+
+            function createExternalLink(url, label) {
+                const link = document.createElement('a');
+                link.href = url;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.textContent = label;
+                return link;
+            }
+
+            function isHttpUrl(value) {
+                try {
+                    const url = new URL(value);
+                    return url.protocol === 'https:' || url.protocol === 'http:';
+                } catch (_) {
+                    return false;
+                }
+            }
+
+            function formatEventDate(event) {
+                const start = event.start || {};
+                const end = event.end || {};
+                if (start.date) {
+                    const startText = formatDateOnly(start.date);
+                    const endText = end.date ? formatDateOnly(end.date, true) : '';
+                    return endText && endText !== startText ? `${startText}〜${endText}` : startText;
+                }
+
+                const startDate = new Date(start.dateTime);
+                const endDate = end.dateTime ? new Date(end.dateTime) : null;
+                if (Number.isNaN(startDate.getTime())) return '日時未定';
+                const dateText = new Intl.DateTimeFormat('ja-JP', {
+                    timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric', weekday: 'short',
+                }).format(startDate);
+                const startTime = new Intl.DateTimeFormat('ja-JP', {
+                    timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit',
+                }).format(startDate);
+                const endTime = endDate && !Number.isNaN(endDate.getTime())
+                    ? new Intl.DateTimeFormat('ja-JP', {
+                        timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit',
+                    }).format(endDate)
+                    : '';
+                return `${dateText} ${startTime}${endTime ? `〜${endTime}` : '〜'}`;
+            }
+
+            function formatDateOnly(value, exclusiveEnd = false) {
+                const date = new Date(`${value}T00:00:00+09:00`);
+                if (exclusiveEnd) date.setDate(date.getDate() - 1);
+                return new Intl.DateTimeFormat('ja-JP', {
+                    timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric', weekday: 'short',
+                }).format(date);
+            }
+
+            function createGoogleTemplateUrl(event) {
+                const params = new URLSearchParams({
+                    action: 'TEMPLATE',
+                    text: event.summary || '絵恋空の予定',
+                    dates: `${toGoogleDate(event.start)}/${toGoogleDate(event.end)}`,
+                    ctz: 'Asia/Tokyo',
+                });
+                if (event.description) params.set('details', event.description);
+                if (event.location) params.set('location', event.location);
+                return `https://calendar.google.com/calendar/render?${params.toString()}`;
+            }
+
+            function toGoogleDate(value) {
+                if (!value) return '';
+                if (value.date) return value.date.replace(/-/g, '');
+                const date = new Date(value.dateTime);
+                return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+            }
+        })();
+    </script>
 
 </body>
 </html>

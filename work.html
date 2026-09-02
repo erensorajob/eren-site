@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - 絵恋空 Official Site</title>
+    <title>Works - 絵恋空 Official Site</title>
+    <meta name="description" content="絵恋空 Official Siteの作品情報と販売ページをご案内します。">
     
     <!-- フォントの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,6 +51,73 @@
             margin-bottom: 30px;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
+
+        .works-intro {
+            margin: -8px 0 28px;
+            color: #666;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .work-card {
+            margin-bottom: 22px;
+            padding: 22px;
+            background: #fff8fa;
+            border: 2px solid #ffd1dc;
+            border-radius: 14px;
+        }
+
+        .work-card:last-child { margin-bottom: 0; }
+
+        .work-badge {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 4px 12px;
+            color: #fff;
+            background: #ff9fb5;
+            border-radius: 999px;
+            font-size: .8rem;
+            font-weight: 700;
+        }
+
+        .work-card h2 {
+            margin: 0 0 10px;
+            color: #e66f8b;
+            font-size: 1.2rem;
+        }
+
+        .work-card p {
+            margin: 0 0 16px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .work-link {
+            display: inline-block;
+            padding: 10px 18px;
+            color: #fff;
+            background: #ff6b8b;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .work-link:hover { opacity: .8; }
+
+        .site-footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px 14px;
+            margin: 28px auto 40px;
+            padding: 0 20px;
+            color: #999;
+            text-align: center;
+            font-size: .72rem;
+            line-height: 1.6;
+        }
+
+        .site-footer a { margin-right: 14px; color: #d86682; }
 
         /* ========================================
            ハンバーガーメニュー（トップページと完全に同じ）
@@ -168,7 +236,7 @@
                 <li><a href="index.html">Home</a></li> 
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
-                <li><a href="works.html">Works</a></li>
+                <li><a href="work.html">Works</a></li>
                 <li><a href="links.html">Official Links</a></li>
             </ul>
         </nav>
@@ -179,15 +247,41 @@
         <div class="page-content">
             
             <!-- ここから自由にページの中身を書いていきます -->
-            <h1 class="page-title">Profile</h1>
-            
-            <p>ここにプロフィール文を書きます。</p>
-            <p>誕生日：◯月◯日<br>趣味：◯◯</p>
+            <h1 class="page-title">Works</h1>
+            <p class="works-intro">これまでの作品と販売ページをご案内します。</p>
+
+            <article class="work-card">
+                <span class="work-badge">IMAGE VIDEO</span>
+                <h2>Sora3 君を包む陽だまり・絵恋空</h2>
+                <p>絵恋空のイメージビデオ作品です。</p>
+                <a class="work-link" href="https://video.dmm.co.jp/av/list/?actress=1096339" target="_blank" rel="noopener noreferrer">FANZAで見る</a>
+            </article>
+
+            <article class="work-card">
+                <span class="work-badge" style="background:#007bff">VOICE / ASMR</span>
+                <h2>職場ではバリキャリ上司の彼女と二人きりになると…</h2>
+                <p>従順肉便器化するので一生離さない潮吹き調教を始めることにした</p>
+                <a class="work-link" href="https://www.dlsite.com/maniax/work/=/product_id/RJ01673925.html" target="_blank" rel="noopener noreferrer">DLsiteで聴く</a>
+            </article>
+
+            <article class="work-card">
+                <span class="work-badge" style="background:#ff9900">PHOTO BOOK</span>
+                <h2>絵恋 空 ヌード写真集『小悪魔ホテル密会』249 pics</h2>
+                <p>撮り下ろし写真集。電子書籍・Kindleでも配信中です。</p>
+                <a class="work-link" href="https://www.amazon.co.jp/dp/B0H7GDNDVN" target="_blank" rel="noopener noreferrer">Amazonで購入</a>
+            </article>
 
             <!-- ここまで -->
 
         </div>
     </div>
+
+    <footer class="site-footer">
+        <a href="site-info.html">サイト情報・広告について</a>
+        <span>R-18・18歳未満閲覧禁止</span>
+        <span>アフィリエイト広告を含みます</span>
+        <span>© 絵恋空 Official Site</span>
+    </footer>
 
 </body>
 </html>
