@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - 絵恋空 Official Site</title>
+    <title>Official Links - 絵恋空 Official Site</title>
     
     <!-- フォントの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +49,54 @@
             margin-top: 0;
             margin-bottom: 30px;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .links-intro {
+            margin: -10px 0 28px;
+            color: #666;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .official-links {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .official-link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 110px;
+            padding: 20px;
+            color: #333;
+            background: #fff8fa;
+            border: 2px solid #ffd1dc;
+            border-radius: 14px;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .official-link:hover {
+            transform: translateY(-3px);
+            background: #fff;
+            box-shadow: 0 6px 16px rgba(255, 159, 181, 0.25);
+        }
+
+        .link-name {
+            color: #e66f8b;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .link-description {
+            margin-top: 7px;
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         /* ========================================
@@ -148,6 +196,18 @@
     .menu-content {
         padding-top: 120px; 
     }
+
+    .page-content {
+        padding: 30px 18px;
+    }
+
+    h1.page-title {
+        font-size: 2.3rem;
+    }
+
+    .official-links {
+        grid-template-columns: 1fr;
+    }
 }
     </style>
 </head>
@@ -179,10 +239,22 @@
         <div class="page-content">
             
             <!-- ここから自由にページの中身を書いていきます -->
-            <h1 class="page-title">Profile</h1>
-            
-            <p>ここにプロフィール文を書きます。</p>
-            <p>誕生日：◯月◯日<br>趣味：◯◯</p>
+            <h1 class="page-title">Official Links</h1>
+            <p class="links-intro">絵恋空の公式アカウント・関連ページはこちら</p>
+
+            <div class="official-links">
+                <a href="https://erensora.fanbox.cc/" class="official-link" target="_blank" rel="noopener noreferrer">
+                    <span class="link-name">PIXIV FANBOX</span>
+                    <span class="link-description">オフィシャルファンクラブ</span>
+                </a>
+
+                <!-- リンク追加用の雛形：このaタグ全体をコピーして、URL・名前・説明を書き換えます。
+                <a href="ここにURL" class="official-link" target="_blank" rel="noopener noreferrer">
+                    <span class="link-name">サービス名</span>
+                    <span class="link-description">ここに短い説明を書きます</span>
+                </a>
+                -->
+            </div>
 
             <!-- ここまで -->
 

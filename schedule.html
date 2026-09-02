@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - 絵恋空 Official Site</title>
+    <title>Schedule - 絵恋空 Official Site</title>
     
     <!-- フォントの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +49,65 @@
             margin-top: 0;
             margin-bottom: 30px;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .content-section + .content-section {
+            margin-top: 48px;
+        }
+
+        .section-title {
+            font-family: 'Rampart One', sans-serif;
+            font-size: 2rem;
+            color: #ff9fb5;
+            margin: 0 0 18px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed #ffd1dc;
+        }
+
+        .empty-message {
+            margin: 0;
+            padding: 22px;
+            text-align: center;
+            color: #777;
+            background: #fff8fa;
+            border-radius: 10px;
+        }
+
+        .schedule-detail {
+            padding: 20px;
+            margin-bottom: 16px;
+            background: #fff;
+            border-left: 5px solid #ff9fb5;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .schedule-detail time {
+            display: block;
+            margin-bottom: 6px;
+            color: #e9829a;
+            font-weight: 700;
+        }
+
+        .schedule-detail h3 {
+            margin: 0 0 10px;
+        }
+
+        .schedule-detail p {
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        .schedule-detail a {
+            display: inline-block;
+            margin-top: 12px;
+            color: #d86682;
+            font-weight: 700;
+        }
+
+        .calendar-title {
+            margin: 28px 0 12px;
+            font-size: 1.2rem;
         }
 
         /* ========================================
@@ -171,6 +230,14 @@
 
 /* --- スマホ画面（幅768px以下）の調整 --- */
 @media (max-width: 768px) {
+  .page-content {
+    padding: 28px 18px;
+  }
+
+  h1.page-title {
+    font-size: 2.3rem;
+  }
+
   .calendar-wrapper iframe {
     height: 400px; /* スマホで長すぎず、予定が潰れない絶妙な高さに調整 */
   }
@@ -205,9 +272,30 @@
         <div class="page-content">
             
             <!-- ここから自由にページの中身を書いていきます -->
-            <div class="calendar-wrapper">
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&title=%E7%B5%B5%E6%81%8B%E7%A9%BA%E3%81%AE%E9%85%8D%E4%BF%A1%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&mode=MONTH&showTabs=0&showTz=0&showCalendars=0&src=ZXJlbnNvcmEuam9iQGdtYWlsLmNvbQ&color=%23ff9fb5" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-            </div>
+            <h1 class="page-title">Schedule</h1>
+
+            <section class="content-section" aria-labelledby="schedule-title">
+                <h2 id="schedule-title" class="section-title">Schedule</h2>
+
+                <div class="schedule-details">
+                    <p class="empty-message">現在、新しいお知らせはありません。</p>
+
+                    <!-- 更新用テンプレート：予定を追加するときは、このコメント内をコピーしてください。
+                    <article class="schedule-detail">
+                        <time datetime="2026-09-05T21:00">2026.09.05 21:00〜</time>
+                        <h3>配信・イベントのタイトル</h3>
+                        <p>ここに配信やイベントの詳しい内容を書きます。</p>
+                        必要な予定だけ、次のリンクを追加します。
+                        <a href="リンク先URL" target="_blank" rel="noopener noreferrer">詳細・お申し込みはこちら</a>
+                    </article>
+                    -->
+                </div>
+
+                <h3 class="calendar-title">Calendar</h3>
+                <div class="calendar-wrapper">
+                    <iframe title="絵恋空の公開スケジュール" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&src=M2NlODY5MzM2NjMxZWNiNjdkMDc4ODM2ZjVmNzQ1YjA1ZmVjZTAyMTRiODNhMWVlYWE0OTZiZWEwZjRmMTVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039be5&color=%230b8043" style="border: solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </section>
             <!-- ここまで -->
 
         </div>
